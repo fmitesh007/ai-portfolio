@@ -1,0 +1,23 @@
+Retrieval-Augmented Generation (RAG) grounds a language model in external
+documents so answers can be traced to sources. A RAG pipeline has two phases.
+During ingestion, documents are loaded, cleaned, split into chunks and embedded
+into a vector database. During querying, the user question is embedded, the
+nearest chunks are retrieved, and they are inserted into a prompt with explicit
+citations before the language model generates an answer.
+
+Chunking matters. Character chunking is simple but can cut words in half. Token
+chunking respects model context limits. Recursive chunking splits on paragraph,
+line and sentence boundaries before falling back to words. Semantic chunking
+groups adjacent sentences by embedding similarity so a chunk stays on one topic.
+
+A vector database such as Chroma, Qdrant, Pinecone or Weaviate stores embeddings
+and returns the most similar passages for a query. Similarity is commonly cosine
+distance. Retrieval quality depends on chunk size, overlap and the embedding model.
+
+LangChain and LlamaIndex orchestrate these steps into reusable chains and agents.
+LangGraph models a workflow as a graph of nodes and conditional edges, which makes
+tool-using agents with loops and step traces straightforward to build.
+
+Production systems track LLM operational meters: latency percentiles, input and
+output token counts, estimated cost, error rates and response telemetry. These
+metrics make regressions visible and keep generation costs under control.

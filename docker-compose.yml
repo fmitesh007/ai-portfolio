@@ -1,0 +1,30 @@
+services:
+  docquery:
+    build:
+      context: .
+      dockerfile: docquery/Dockerfile
+    ports:
+      - "8001:8000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+
+  llmmeter:
+    build:
+      context: .
+      dockerfile: llmmeter/Dockerfile
+    ports:
+      - "8002:8000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+
+  agentflow:
+    build:
+      context: .
+      dockerfile: agentflow/Dockerfile
+    ports:
+      - "8003:8000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
